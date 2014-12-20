@@ -1,5 +1,5 @@
 /*
- * ExprTownOfPlayer.class - Made by nfell2009
+ * ExprTDPlayers.class - Made by nfell2009
  * nfell2009.uk (C) nfell2009 2014
  * Code by nfell2009
  * 
@@ -13,7 +13,6 @@ import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
 import ch.njol.util.Kleenean;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
@@ -21,9 +20,9 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 
 
-public class ExprTownOfPlayer extends SimpleExpression<Town>{
+public class ExprTDPlayers extends SimpleExpression<Town>{
 
-	private Expression<Player> player;
+	private Expression<String> town;
 	
 	public Class<? extends Town> getReturnType() {
 		
@@ -38,7 +37,7 @@ public class ExprTownOfPlayer extends SimpleExpression<Town>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean init(Expression<?>[] args, int arg1, Kleenean arg2, ParseResult arg3) {
-		this.player = (Expression<Player>) args[0];
+		this.town = (Expression<String>) args[0];
 		return true;
 	}
 
@@ -50,19 +49,19 @@ public class ExprTownOfPlayer extends SimpleExpression<Town>{
 	@Override
 	@javax.annotation.Nullable
 	protected Town[] get(Event arg0) {
-		String p = this.player.getSingle(arg0).toString();
-		Town r = null;
+		String t = this.town.getSingle(arg0);
+		Town tw = null;
 		try {
-			r = TownyUniverse.getDataSource().getResident(p).getTown();
+			tw = TownyUniverse.getDataSource().getTown(t);
 		} catch (NotRegisteredException e) {
 			e.printStackTrace();
 		}
 		
-		if (r == null){
+		if (tw == null){
 			return null;
 		}
 
-		return new Town[] { r };
+		return new Town[] { tw };
 	}
 
 }
