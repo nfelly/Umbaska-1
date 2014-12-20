@@ -37,7 +37,7 @@ public class EffSetPlotPrice extends Effect {
  
   @Override
   public String toString(Event event, boolean b){
-    return "Set a plot owner";
+    return "Set a plot price";
   }
  
   @Override
