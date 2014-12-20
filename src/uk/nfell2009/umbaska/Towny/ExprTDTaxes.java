@@ -43,7 +43,7 @@ public class ExprTDTaxes extends SimpleExpression<Double>{
 
 	@Override
 	public String toString(@javax.annotation.Nullable Event arg0, boolean arg1) {
-		return "return count of players in a town";
+		return "return taxes of a town";
 	}
 
 	@Override
