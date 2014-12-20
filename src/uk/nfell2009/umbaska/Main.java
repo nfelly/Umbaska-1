@@ -62,8 +62,8 @@ public class Main extends JavaPlugin {
 		  *  Towny - Effects
 		  */
 		 
-		 Skript.registerEffect(EffSetDelay.class, new String[] { "set owner of plot at %location% to %player%" });
-		 
+		 Skript.registerEffect(EffSetPlotOwner.class, new String[] { "set owner of plot at %location% to %player%" });
+		 Skript.registerEffect(EffSetPlotPrice.class, new String[] { "set price of plot at %location% to %player%" });
 		 
 		 /*
 		  *  Towny - Expressions
@@ -73,8 +73,10 @@ public class Main extends JavaPlugin {
 		 Skript.registerExpression(ExprTownOfPlayer.class, Town.class, ExpressionType.PROPERTY, new String[] {"town of %player%"});
 		 Skript.registerExpression(ExprTDBank.class, Double.class, ExpressionType.PROPERTY, new String[] {"town balance of %string%"});
 		 Skript.registerExpression(ExprTDPlayerCount.class, Integer.class, ExpressionType.PROPERTY, new String[] {"player[ ]count of %string%"});
+		 Skript.registerExpression(ExprTDPlayers.class, String.class, ExpressionType.PROPERTY, new String[] {"players of %string%"});
 		 Skript.registerExpression(ExprTDTaxes.class, Double.class, ExpressionType.PROPERTY, new String[] {"town taxes of %string%"});
 		 Skript.registerExpression(ExprPlotOwner.class, String.class, ExpressionType.PROPERTY, new String[] {"owner of plot at %location%"});
+		 
 		 
 		 
 	 }

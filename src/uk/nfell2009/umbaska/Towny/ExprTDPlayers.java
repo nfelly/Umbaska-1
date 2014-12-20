@@ -20,13 +20,13 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 
 
-public class ExprTDPlayers extends SimpleExpression<Town>{
+public class ExprTDPlayers extends SimpleExpression<String>{
 
 	private Expression<String> town;
 	
-	public Class<? extends Town> getReturnType() {
+	public Class<? extends String> getReturnType() {
 		
-		return Town.class;
+		return String.class;
 	}
 
 	@Override
@@ -43,12 +43,12 @@ public class ExprTDPlayers extends SimpleExpression<Town>{
 
 	@Override
 	public String toString(@javax.annotation.Nullable Event arg0, boolean arg1) {
-		return "return town of player";
+		return "return list of players in town";
 	}
 
 	@Override
 	@javax.annotation.Nullable
-	protected Town[] get(Event arg0) {
+	protected String[] get(Event arg0) {
 		String t = this.town.getSingle(arg0);
 		Town tw = null;
 		try {
@@ -60,8 +60,10 @@ public class ExprTDPlayers extends SimpleExpression<Town>{
 		if (tw == null){
 			return null;
 		}
+		
+		String pl = tw.getResidents().toString();
 
-		return new Town[] { tw };
+		return new String[] { pl };
 	}
 
 }
