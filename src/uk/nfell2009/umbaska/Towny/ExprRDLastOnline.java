@@ -8,6 +8,8 @@
 
 package uk.nfell2009.umbaska.Towny;
 
+import java.text.SimpleDateFormat;
+
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
 import ch.njol.skript.lang.util.SimpleExpression;
@@ -21,13 +23,15 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 
 
-public class ExprRDLastOnline extends SimpleExpression<Long>{
+public class ExprRDLastOnline extends SimpleExpression<String>{
 
+	public static final SimpleDateFormat lastOnlineFormat = new SimpleDateFormat("MMMMM dd '@' HH:mm");
+	
 	private Expression<Player> player;
 	
-	public Class<? extends Long> getReturnType() {
+	public Class<? extends  String> getReturnType() {
 		
-		return Long.class;
+		return  String.class;
 	}
 
 	@Override
@@ -49,8 +53,8 @@ public class ExprRDLastOnline extends SimpleExpression<Long>{
 
 	@Override
 	@javax.annotation.Nullable
-	protected Long[] get(Event arg0) {
-		String p = this.player.getSingle(arg0).toString();
+	protected String[] get(Event arg0) {
+		String p = this.player.getSingle(arg0).getName();
 		Resident r = null;
 		try {
 			r = TownyUniverse.getDataSource().getResident(p);
@@ -58,13 +62,9 @@ public class ExprRDLastOnline extends SimpleExpression<Long>{
 			e.printStackTrace();
 		}
 		
-		Long laston = r.getLastOnline();
+		String s = lastOnlineFormat.format(r.getLastOnline());
 		
-		if (laston == null){
-			return null;
-		}
-
-		return new Long[] { laston };
+		return new String[] { s };
 	}
 
 }

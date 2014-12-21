@@ -50,7 +50,7 @@ public class ExprRDRegistered extends SimpleExpression<Long>{
 	@Override
 	@javax.annotation.Nullable
 	protected Long[] get(Event arg0) {
-		String p = this.player.getSingle(arg0).toString();
+		String p = this.player.getSingle(arg0).getName();
 		Resident r = null;
 		try {
 			r = TownyUniverse.getDataSource().getResident(p);

@@ -1,5 +1,5 @@
 /*
- * ExprRDTitle.class - Made by nfell2009
+ * ExprRDLastOnline.class - Made by nfell2009
  * nfell2009.uk (C) nfell2009 2014
  * Code by nfell2009
  * 
@@ -7,6 +7,8 @@
 
 
 package uk.nfell2009.umbaska.Towny;
+
+import java.text.SimpleDateFormat;
 
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -17,16 +19,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.TownyUniverse;
 
 
-public class ExprRDTitle extends SimpleExpression<String>{
+public class ExprRDLastOnlineDate extends SimpleExpression<String>{
 
+	public static final SimpleDateFormat lastOnlineFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+	
 	private Expression<Player> player;
 	
 	public Class<? extends String> getReturnType() {
 		
-		return String.class;
+		return  String.class;
 	}
 
 	@Override
@@ -50,18 +55,16 @@ public class ExprRDTitle extends SimpleExpression<String>{
 	@javax.annotation.Nullable
 	protected String[] get(Event arg0) {
 		String p = this.player.getSingle(arg0).getName();
-		String out = null;
+		Resident r = null;
 		try {
-			out = TownyUniverse.getDataSource().getResident(p).getTitle();
+			r = TownyUniverse.getDataSource().getResident(p);
 		} catch (NotRegisteredException e) {
 			e.printStackTrace();
 		}
 		
-		if (out == null){
-			return null;
-		}
-
-		return new String[] { out };
+		String s = lastOnlineFormat.format(r.getLastOnline());
+		
+		return new String[] { s };
 	}
 
 }
