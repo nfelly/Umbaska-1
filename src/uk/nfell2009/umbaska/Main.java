@@ -85,7 +85,7 @@ public class Main extends JavaPlugin {
 		  *  Misc - Effects
 		  */
 		 
-		 Skript.registerEffect(EffDropAll.class, new String[] { "force drop of inventory of %player% at %location%" });
+		 Skript.registerEffect(EffDropAll.class, new String[] { "force drop inventory of %player% at %location%" });
 		 
 		 
 	 }
