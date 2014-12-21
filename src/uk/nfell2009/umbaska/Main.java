@@ -10,8 +10,11 @@ package uk.nfell2009.umbaska;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
+
 import com.palmergames.bukkit.towny.object.Town;
 
+
+import uk.nfell2009.umbaska.Misc.EffDropAll;
 /*
  *  Importing other packages
  */
@@ -78,6 +81,11 @@ public class Main extends JavaPlugin {
 		 Skript.registerExpression(ExprPlotOwner.class, String.class, ExpressionType.PROPERTY, new String[] {"owner of plot at %location%"});
 		 Skript.registerExpression(ExprPlotPrice.class, Double.class, ExpressionType.PROPERTY, new String[] {"price of plot at %location%"});
 		 
+		 /*
+		  *  Misc - Effects
+		  */
+		 
+		 Skript.registerEffect(EffDropAll.class, new String[] { "force drop of inventory of %player% at %location%" });
 		 
 		 
 	 }
