@@ -7,7 +7,10 @@
 
 package uk.nfell2009.umbaska.PlotMe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+//import java.util.Map;
+import java.util.Map.Entry;
 
 import ch.njol.skript.lang.Expression;
 import ch.njol.skript.lang.SkriptParser.ParseResult;
@@ -58,11 +61,15 @@ public class ExprGetPlayerPlots extends SimpleExpression<String>{
 		}
 		HashMap<String, Plot> plots = new HashMap<String, Plot>();
 		plots = PlotManager.getPlots(p);
-		String out = plots.toString();
+		ArrayList<String> out = new ArrayList<String>();
+		for ( Entry<String, Plot> entry : plots.entrySet()) {
+		    out.add(entry.getKey());
+		}
+		//String out = plots.toString();
 		
-		out = out.replace("{", "");
-		out = out.replace("}", "");
-		return new String[] { out };
+		//out = out.replace("{", "");
+		//out = out.replace("}", "");
+		return new String[] { out.toString() };
 	}
 
 }
